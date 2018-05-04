@@ -1,5 +1,5 @@
 # Gitting-Started
-This guide will help you setup your Git Workflow on your machine, and will document how to setup a new site using our workflow
+This guide will help you setup your Git Workflow on your machine, and will document how to setup a new site using our workflow. This guide assumes you are using WordPress as your backend.
 
 ### Prerequisites
 
