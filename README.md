@@ -1,14 +1,60 @@
+
 # Gitting-Started
 This guide will help you setup your Git Workflow on your machine, and will document how to setup a new site using our workflow. This guide assumes you are using WordPress as your backend.
 
-### Prerequisites
+## Prerequisites
 
-What things you need to install the software and how to install them
+This guide is split into four main sections:
+
+ 1. Local machine setup
+ 2. Server setup (...creating dev environment)
+ 3. Git Repository setup
+ 4. Wordpress database setup
+
+
+## 1. Local machine setup
+### Installing Necessary software & dependencies
+
+Before you can get started with git you need to decide whether you'll work with git using the CLI (command line interface) or a GUI application. Either will work fine for our workflow. See below for setups for each:
+
+#### CLI
+The default terminal application that comes with OSX isn't great for what we need to do, so download and install [iTerm2](https://www.iterm2.com/), an alternate terminal client which allows for a lot more customisation.
+
+Next, we'll need zsh- an alternative to bash (which is the shell language that ships natively with OSX), again this will allow us to add visual elements to our terminal. to install zsh, we'll need [Homebrew](https://brew.sh/) :
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+Once that's installed, restart iTerm2 and enter the following to install zsh:
+```
+brew install zsh zsh-completions
+```
+
+In iTerm2, run the following command to install oh-my-zsh:
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+To make zsh the default upon opening iTerm, run the following:
+```
+chsh -s $(which zsh)
+```
+
+#### GUI Application
+
+
+Say what the step will be
 
 ```
-Give examples
+Give the example
 ```
 
+And repeat
+
+```
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+## 2. Server setup
 ### Installing
 
 A step by step series of examples that tell you have to get a development env running
@@ -26,57 +72,39 @@ until finished
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
+## 3. Git Repository setup
+### Installing
 
-## Running the tests
+A step by step series of examples that tell you have to get a development env running
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Say what the step will be
 
 ```
-Give an example
+Give the example
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
+And repeat
 
 ```
-Give an example
+until finished
 ```
 
-## Deployment
+End with an example of getting some data out of the system or using it for a little demo
+## 4. Wordpress database setup
+### Installing
 
-Add additional notes about how to deploy this on a live system
+A step by step series of examples that tell you have to get a development env running
 
-## Built With
+Say what the step will be
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+```
+Give the example
+```
 
-## Contributing
+And repeat
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+```
+until finished
+```
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+End with an example of getting some data out of the system or using it for a little demo
