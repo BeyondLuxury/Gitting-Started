@@ -114,7 +114,7 @@ Save this, then go to the newly created subdomain in a browser and the server sh
 We now need to configure the server so that we can connect to it via SSH keys (vital for allowing git to push files automatically)
 
 To do this we'll need to use the CLI to login to the server and enable SSH keys.
-##### 2.1.3.1 Logging into the server
+##### 2.1.3.1 Logging onto the server
 In the CLI, using the same details that you used when creating the List account above, enter the following:
 ```
 ssh USERNAME@SERVERIP
@@ -168,6 +168,81 @@ The name we gave the host in the config file is all we need for the CLI to conne
 ##### MAKE SURE THIS ENTIRE PROCESS HAS BEEN SETUP FOR BOTH THE DEV. AND ORIGINAL DOMAIN BEFORE PROCEEDING
 We now have SSH connections setup with the server and we're ready to start using Git!
 ## 3. Git Repository setup
+### 3.1 Set up git development repo
+First thing is to set up the staging server repo, but do it outside of the webroot _public_html_ one level above in the user _home_ is good. This will contain the version control data and later we will push the actual source files to our _WordPress install directory_ which will be known as the working directory. So **SSH** into your staging server and switch to home…
+```
+ssh alias@mydomain.com
+```
+Move to the home directory
+```
+cd
+```
+Make a directory which will store our version control data and initialise it with a _-bare_ option which will have no _working directory._ This is the way this needs to work and we will push the actual files to our working directory destination when we use the **Git hooks.**
+```
+mkdir wpstaging.git
+```
+```
+cd wpstaging.git
+```
+```
+git --bare init
+```
+The CLI should output the following:
+```
+Initialized empty Git repository in /home/username/wpstaging.git/
+```
+### 3.2 Set up git production repo
+We now need to set up the production server repo, but do it outside of the webroot _public_html_ one level above in the user _home_ is good. This will contain the version control data and later we will push the actual source files to our _WordPress install directory_ which will be known as the working directory. So **SSH** into your staging server and switch to home…
+```
+ssh alias@mydomain.com
+```
+Move to the home directory
+```
+cd
+```
+Make a directory which will store our version control data and initialise it with a _-bare_ option which will have no _working directory._ This is the way this needs to work and we will push the actual files to our working directory destination when we use the **Git hooks.**
+```
+mkdir wpstaging.git
+```
+```
+cd wpstaging.git
+```
+```
+git --bare init
+```
+The CLI should output the following:
+```
+Initialized empty Git repository in /home/username/wpstaging.git/
+```
+### 3.3 Local dev set up Git repo
+Now lets set up a local Git repo and add the server repo as our remote repo. In this local example, the directory will be a local development site in WordPress which already has files already in it.
+```
+cd LOCATION YOU WANT LOCAL ENVI.
+```
+```
+git init
+```
+#### Gitignore
+Add the tracked files
+```
+git add .
+```
+And commit all the files
+```
+git commit -m "first commit"
+```
+Check the status and we should have a clean directory
+```
+git status
+```
+### 3.4 Add the remotes to the local repo
+Still on the local environment, time to add the remote repo.
+We will set up the remote repo branch as ‘_staging_‘. Our  **local**repo is  _master._
+```
+git remote add staging ssh://username@mydomain.com:/home/username/wpstaging.git
+```
+### 3.5 Pushing the server repo to our working directory with git hooks
+
 
 
 
