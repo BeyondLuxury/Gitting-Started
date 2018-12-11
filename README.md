@@ -167,100 +167,31 @@ ssh ALIAS
 The name we gave the host in the config file is all we need for the CLI to connect to the server.
 ##### MAKE SURE THIS ENTIRE PROCESS HAS BEEN SETUP FOR BOTH THE DEV. AND ORIGINAL DOMAIN BEFORE PROCEEDING
 We now have SSH connections setup with the server and we're ready to start using Git!
-## 3. Git Repository setup
-### 3.1 Set up git development repo
-First thing is to set up the staging server repo, but do it outside of the webroot _public_html_ one level above in the user _home_ is good. This will contain the version control data and later we will push the actual source files to our _WordPress install directory_ which will be known as the working directory. So **SSH** into your staging server and switch to home…
-```
-ssh alias@mydomain.com
-```
-Move to the home directory
-```
-cd
-```
-Make a directory which will store our version control data and initialise it with a _-bare_ option which will have no _working directory._ This is the way this needs to work and we will push the actual files to our working directory destination when we use the **Git hooks.**
-```
-mkdir wpstaging.git
-```
-```
-cd wpstaging.git
-```
-```
-git --bare init
-```
-The CLI should output the following:
-```
-Initialized empty Git repository in /home/username/wpstaging.git/
-```
-### 3.2 Set up git production repo
-We now need to set up the production server repo, but do it outside of the webroot _public_html_ one level above in the user _home_ is good. This will contain the version control data and later we will push the actual source files to our _WordPress install directory_ which will be known as the working directory. So **SSH** into your staging server and switch to home…
-```
-ssh alias@mydomain.com
-```
-Move to the home directory
-```
-cd
-```
-Make a directory which will store our version control data and initialise it with a _-bare_ option which will have no _working directory._ This is the way this needs to work and we will push the actual files to our working directory destination when we use the **Git hooks.**
-```
-mkdir wpstaging.git
-```
-```
-cd wpstaging.git
-```
-```
-git --bare init
-```
-The CLI should output the following:
-```
-Initialized empty Git repository in /home/username/wpstaging.git/
-```
-### 3.3 Local dev set up Git repo
-Now lets set up a local Git repo and add the server repo as our remote repo. In this local example, the directory will be a local development site in WordPress which already has files already in it.
-```
-cd LOCATION YOU WANT LOCAL ENVI.
-```
-```
-git init
-```
-#### Gitignore
-Add the tracked files
-```
-git add .
-```
-And commit all the files
-```
-git commit -m "first commit"
-```
-Check the status and we should have a clean directory
-```
-git status
-```
-### 3.4 Add the remotes to the local repo
-Still on the local environment, time to add the remote repo.
-We will set up the remote repo branch as ‘_staging_‘. Our  **local**repo is  _master._
-```
-git remote add staging ssh://username@mydomain.com:/home/username/wpstaging.git
-```
-### 3.5 Pushing the server repo to our working directory with git hooks
+## 3. BitBucket & SourceTree Repository setup
+### Bitbucket
+Make sure you have an account on Bitbucket, if not, sign up.
+#### Creating a remote repository
+On the bitbucket site, once logged in: create a repository and call it whatever you choose. Once created, you'll have an empty repo where your new files can now be pushed to.
+#### Creating the Local repository
+We'll now need to create a local repository where we'll store all of our website files (minus the database). Open SourceTree and make sure your BitBucket account is synced with SourceTree (Go to preferences, Accounts then add your bitbucket account if it's not there).
 
+Create a local repo and then add the remote one as a remote via SourceTree. Commit your files and push them up to the Bitbucket repo. You're now ready to deploy to the server!
 
+*Remember - Bitbucket doesn't store Databases, so we'll deal with those later using a WP plugin called WP Migrate DB Pro*
+## 4. Pushing changes from local to server (Beam)
+Now we've committed our change to the version control system (Git), we're now able to send the changes up to either the dev or production server. To do this, we'll use a command line tool called Beam, which uses the Git data to know what to push and what not to push. Install it here: https://github.com/heyday/beam
 
+Once installed, we'll need to add a beam.json file to the folder root of the project you're working on. Add the dev and production server to the .json file (using the ssh details we made in the .config file in the .ssh folder on our local computer).
+
+Once setup, make a change to some code, push it using SourceTree and then in the CLI (terminal) whilst in the project folder, type "beam up `name of server`". It'll calculate what's been changed and will show you the changes in terminal. Type `yes` to confirm.
+
+You've now pushed to your server using Beam! Follow the next step to push your database changes.
 
 ## 4. Wordpress database setup
-### Installing
+### WP Migrate DB Pro Plugin - SERVER
+Setup a blank database on the server you're working on (If starting on a new project, if not continue reading). Login to Wordpress and install the WP Migrate DB Pro plugin from the Delicious Brains website. Register using the license key. Copy the unique identifier in the settings of that plugin. We'll need to copy this to our local WP installation.
+### WP Migrate DP Pro Plugin - LOCAL MACHINE
+On our local machine, again setup a blank database and install Wordpress (if not done so already). Install the WP Migrate DP Pro plugin from the Delicious brains website. Using the unique code we copied from the live server, copy it into the local server area asking for connection info. You can now pull and push the databases!
 
-A step by step series of examples that tell you have to get a development env running
 
-Say what the step will be
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
